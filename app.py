@@ -25,6 +25,7 @@ class GIFOverlay:
         
         self.label.bind("<ButtonPress-1>", self.start_move)
         self.label.bind("<B1-Motion>", self.do_move)
+        self.label.bind("<Double-Button-1>", self.print_position)
 
     def update_animation(self):
         self.label.configure(image=self.frames[self.frame_idx])
@@ -39,6 +40,11 @@ class GIFOverlay:
         x = self.window.winfo_x() + event.x - self.start_x
         y = self.window.winfo_y() + event.y - self.start_y
         self.window.geometry(f"+{x}+{y}")
+
+    def print_position(self, event):
+        x = self.window.winfo_x()
+        y = self.window.winfo_y()
+        print(f"{self.name} position: ({x}, {y})")
 
 if __name__ == "__main__":
     root = tk.Tk()
